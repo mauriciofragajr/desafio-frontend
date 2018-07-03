@@ -1,9 +1,10 @@
 <template>
   <div class="col-md-9 p-4">
-    <Home/>
+    <!-- <Home/> -->
     <!-- <PostDetail/> -->
     <!-- <Search/> -->
     <!-- <PostsCategory/> -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -19,7 +20,9 @@ export default {
     Home,
     PostDetail,
     Search,
-    PostsCategory,
+    PostsCategory
+  },
+  created: () => {
   },
   data() {
     return {};

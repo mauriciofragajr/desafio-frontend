@@ -9,12 +9,7 @@
           </div>
            <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between d-none d-sm-block d-md-none">
-              <a class="p-2 text-muted" href="#">Categoria</a>
-              <a class="p-2 text-muted" href="#">Categoria</a>
-              <a class="p-2 text-muted" href="#">Categoria</a>
-              <a class="p-2 text-muted" href="#">Categoria</a>
-              <a class="p-2 text-muted" href="#">Categoria</a>
-              <a class="p-2 text-muted" href="#">Categoria</a>
+              <a class="p-2 text-muted" href="#" v-for="cat in getCategories" :key="cat._id">{{cat.name}}</a>
             </nav>
           </div>
         </div>
@@ -33,8 +28,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "header-desafio",
+  computed: {
+    ...mapGetters(["getCategories", "getIsLoading"])
+  },
   data() {
     return {};
   }

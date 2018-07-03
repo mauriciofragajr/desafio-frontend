@@ -3,12 +3,7 @@
     <div class="p-3">
       <h4 class="font-italic">Categorias</h4>
       <ol class="list-unstyled mb-0">
-        <li><a class="text-muted" href="#">Categorias</a></li>
-        <li><a class="text-muted" href="#">Categorias</a></li>
-        <li><a class="text-muted" href="#">Categorias</a></li>
-        <li><a class="text-muted" href="#">Categorias</a></li>
-        <li><a class="text-muted" href="#">Categorias</a></li>
-        <li><a class="text-muted" href="#">Categorias</a></li>
+        <li v-for="cat in getCategories" :key="cat._id"><a class="text-muted" href="#">{{cat.name}}</a></li>
       </ol>
     </div>
 
@@ -24,8 +19,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "sidebar-desafio",
+  computed: {
+    ...mapGetters(["getCategories", "getIsLoading"])
+  },
   data() {
     return {};
   }

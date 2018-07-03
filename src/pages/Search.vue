@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2 class="mb-3">Buscando por: </h2>
-
+    <h2 class="mb-3">Resultados para: {{$route.query.q}}</h2>
     <div class="row">
       <Post />
       <Post />
@@ -12,15 +11,20 @@
 </template>
 
 <script>
-import Post from '../components/Post';
+import Post from "../components/Post";
 
 export default {
   name: "search-desafio",
   components: {
-      Post,
+    Post
+  },
+  created: function () {
+    console.log(this.$route.query.q);
   },
   data() {
-    return {};
+    return {
+
+    };
   }
 };
 </script>
