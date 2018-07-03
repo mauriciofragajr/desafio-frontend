@@ -1,8 +1,8 @@
 import api from './api';
 
 export default {
-    get(q = "", page = 1) {
-        return api.get(`/posts?page=${page}&q=${q}`);
+    get(page = 1, q = null) {
+        return api.get(`/posts?page=${page}${q ? '&q=' + q : ''}`);
     },
     getDetail(slug) {
         return api.get(`/posts/${slug}`);
