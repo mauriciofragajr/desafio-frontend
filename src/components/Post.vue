@@ -4,7 +4,7 @@
       <div class="card-body d-flex flex-column align-items-start">
         <!-- <span class="text-primary" v-for="cat in post.categories" :key="cat._id">{{cat.name}}</span> -->
         <h3 class="mb-0">
-          <a class="text-dark" href="#">{{post.title}}</a>
+          <router-link class="text-dark" :to="{ path: '/posts/' + post.slug }">{{post.title}}</router-link>
         </h3>
         <div class="mb-1 text-muted">{{post.createdAt | formatDate}}</div>
         <p class="card-text mb-auto" v-html="post.body"></p>

@@ -17,7 +17,7 @@
           <td>{{post.createdAt | formatDate}}</td>
           <td>{{post.updatedAt | formatDate}}</td>
           <td>{{post.slug}}</td>
-          <td><router-link :to="{ path: '/dashboard/post-form/edit/' + post.slug }">Editar</router-link> - <a href="#">Excluir</a></td>
+          <td><router-link :to="{ path: '/dashboard/post-form/edit/' + post.slug }">Editar</router-link> - <a href="#" @click="deletePost(post.slug)">Excluir</a></td>
         </tr>
       </tbody>
     </table>
@@ -71,6 +71,14 @@ export default {
           this.nextPage = response.data.nextPage;
           this.prevPage = response.data.prevPage;
           this.totalResults = response.data.total;
+        })
+        .catch(err => console.log(err));
+    },
+    deletePost(slug) {
+      postService
+        .delete(slug)
+        .then(response => {
+          this.fetchPosts(this.page);
         })
         .catch(err => console.log(err));
     }

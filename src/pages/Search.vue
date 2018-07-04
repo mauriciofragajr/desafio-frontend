@@ -47,6 +47,12 @@ export default {
       isLoading: false
     };
   },
+  watch: {
+    $route: function() {
+      this.posts = [];
+      this.fetchPosts(this.$route.query.q);
+    }
+  },
   methods: {
     fetchPosts(q) {
       this.isLoading = true;

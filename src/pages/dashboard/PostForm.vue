@@ -31,8 +31,8 @@
               <div class="col-12 mb-3">
                 <form v-on:submit.prevent="saveCategory">
                   <input type="text" class="form-control mb-1" v-model.trim="newCategory.name" id="categoryName" placeholder="Nome" required>
-                  <input type="text" class="form-control mb-1" v-model.trim="newCategory.slug" id="categorySlug" pattern="[a-zA-Z0-9-]" placeholder="Slug" required>
-                  <button type="submit" class="btn btn-primary" data-dismiss="modal">Incluir</button>
+                  <input type="text" class="form-control mb-1" v-model.trim="newCategory.slug" id="categorySlug" pattern="[a-z0-9\-]+" placeholder="Slug" required>
+                  <button type="submit" class="btn btn-primary">Incluir</button>
                 </form>
               </div>
             </div>

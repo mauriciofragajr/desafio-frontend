@@ -8,7 +8,7 @@
             <p class="text-muted">Desafio para Invasão Nerd.</p>
             <div class="custom-control custom-checkbox" >
               <input type="checkbox" class="custom-control-input" id="adminMode" v-model="adminMode" @change="changeAdminMode">
-              <label class="custom-control-label" for="adminMode">Modo administrativo</label>
+              <label class="custom-control-label text-white" for="adminMode">Modo administrativo</label>
             </div>
           </div>
            <div class="nav-scroller py-1 mb-2">
@@ -23,7 +23,7 @@
       <router-link to="/" class="navbar-brand col-sm-3 col-md-2 mr-0 titulo-desafio">
         <strong>Invasão Nerd</strong>
       </router-link>
-      <input class="form-control form-control-dark w-100 input-desafio" v-model="search" v-on:keyup.enter="goSearch" type="text" placeholder="Pesquisar">
+      <input class="form-control form-control-dark w-100 input-desafio" v-model="search" v-on:keyup.enter="goSearch(search)" type="text" placeholder="Pesquisar">
       <button class="navbar-toggler text-nowrap" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -46,8 +46,12 @@ export default {
     };
   },
   methods: {
-    goSearch() {
-      this.$router.replace({ path: "/search", query: { q: this.search } });
+    goSearch(q) {
+      this.$router.push({
+        path: '/search',
+        query: { q },
+        force: true
+      });
     },
     ...mapActions(["changeAdminMode"])
   },
