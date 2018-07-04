@@ -4,6 +4,9 @@
     <div class="row" v-if="posts.length > 0">
       <Post v-for="post in posts" :key="post._id" :post="post"/>
     </div>
+    <div v-if="posts.length == 0">
+      Nenhum resultado para a busca.
+    </div>
   </div>
 </template>
 

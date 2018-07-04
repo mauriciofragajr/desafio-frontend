@@ -7,7 +7,7 @@
       </ol>
     </div>
 
-    <div class="p-3">
+    <div class="p-3" v-if="getAdminMode">
       <h4 class="font-italic">Área administrativa</h4>
       <ol class="list-unstyled mb-0">
         <li><router-link class="text-muted" :to="{ path: '/dashboard/post-form'}">Incluir Postagem</router-link></li>
@@ -24,7 +24,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "sidebar-desafio",
   computed: {
-    ...mapGetters(["getCategories", "getIsLoading"])
+    ...mapGetters(["getCategories", "getIsLoading","getAdminMode"])
   },
   data() {
     return {};

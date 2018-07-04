@@ -13,12 +13,16 @@ const state = {
 const mutations = {
   SET_CATEGORIES(state, obj) {
     state.categories = obj
+  },
+  CHANGE_ADMIN_MODE(state, obj) {
+    state.adminMode = !state.adminMode
   }
 }
 
 const getters = {
   getCategories: store => store.categories,
-  getIsLoading: store => store.isLoading
+  getIsLoading: store => store.isLoading,
+  getAdminMode: store => store.adminMode
 }
 
 const actions = {
@@ -30,6 +34,9 @@ const actions = {
       console.log(response.data)
       commit('SET_CATEGORIES', response.data.categories)
     })
+  },
+  changeAdminMode({ commit }) {
+    commit('CHANGE_ADMIN_MODE')
   }
 }
 

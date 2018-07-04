@@ -6,6 +6,10 @@
           <div class="col-sm-8 col-md-7 py-4">
             <h4 class="text-white">Sobre</h4>
             <p class="text-muted">Desafio para Invasão Nerd.</p>
+            <div class="custom-control custom-checkbox" >
+              <input type="checkbox" class="custom-control-input" id="adminMode" v-model="adminMode" @change="changeAdminMode">
+              <label class="custom-control-label" for="adminMode">Modo administrativo</label>
+            </div>
           </div>
            <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between d-none d-sm-block d-md-none">
@@ -28,22 +32,27 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "header-desafio",
   computed: {
-    ...mapGetters(["getCategories", "getIsLoading"])
+    ...mapGetters(["getCategories", "getIsLoading", "getAdminMode"])
   },
   data() {
     return {
-      search: ""
+      search: "",
+      adminMode: false
     };
   },
   methods: {
     goSearch() {
       this.$router.replace({ path: "/search", query: { q: this.search } });
-    }
+    },
+    ...mapActions(["changeAdminMode"])
+  },
+  created: function() {
+    this.adminMode = this.getAdminMode;
   }
 };
 </script>
