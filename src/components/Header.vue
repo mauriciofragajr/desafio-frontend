@@ -9,17 +9,17 @@
           </div>
            <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between d-none d-sm-block d-md-none">
-              <a class="p-2 text-muted" href="#" v-for="cat in getCategories" :key="cat._id">{{cat.name}}</a>
+              <a class="p-2 text-muted" :href="'/categories/' + cat.slug" v-for="cat in getCategories" :key="cat._id">{{cat.name}}</a>
             </nav>
           </div>
         </div>
       </div>
     </div>
     <div class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
-      <a href="#" class="navbar-brand col-sm-3 col-md-2 mr-0 titulo-desafio">
+      <router-link to="/" class="navbar-brand col-sm-3 col-md-2 mr-0 titulo-desafio">
         <strong>Invasão Nerd</strong>
-      </a>
-      <input class="form-control form-control-dark w-100 input-desafio" type="text" placeholder="Pesquisar" aria-label="Pesquisar">
+      </router-link>
+      <input class="form-control form-control-dark w-100 input-desafio" v-model="search" v-on:keyup.enter="goSearch" type="text" placeholder="Pesquisar">
       <button class="navbar-toggler text-nowrap" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -36,7 +36,14 @@ export default {
     ...mapGetters(["getCategories", "getIsLoading"])
   },
   data() {
-    return {};
+    return {
+      search: ""
+    };
+  },
+  methods: {
+    goSearch() {
+      this.$router.replace({ path: "/search", query: { q: this.search } });
+    }
   }
 };
 </script>
@@ -47,28 +54,28 @@ export default {
  */
 
 .titulo-desafio {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   font-size: 1rem;
   /* Fundo mais escuro */
-  background-color: rgba(0, 0, 0, .25);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .navbar .form-control {
-  padding: .75rem 1rem;
+  padding: 0.75rem 1rem;
   border-width: 0;
   border-radius: 0;
 }
 
 .input-desafio {
   color: #fff;
-  background-color: rgba(255, 255, 255, .1);
-  border-color: rgba(255, 255, 255, .1);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .input-desafio:focus {
   border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
 
 .nav-scroller {
@@ -92,9 +99,8 @@ export default {
 }
 
 .nav-scroller .nav-link {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: .875rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
 }
-
 </style>

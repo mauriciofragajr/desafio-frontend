@@ -1,29 +1,37 @@
 <template>
-  <div>
-    <h2>Sample blog post</h2>
-    <p>DD/MM/AAAA Categoria: <a href="#">Mark</a></p>
-    <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-    <hr>
-    <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-    <blockquote>
-        <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-    </blockquote>
-    <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-    <h2>Heading</h2>
-    <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+  <div v-if="post">
+    <h2>{{post.title}}</h2>
+    <p>{{post.createdAt | formatDate}} Categorias: <router-link :to="{path: '/categories/' + cat.slug}" v-for="cat in post.categories" :key="cat._id">{{cat.name}}</router-link></p>
+    <p v-html="post.body"></p>
   </div>
 </template>
 
 <script>
-import Post from '../components/Post';
+import Post from "../components/Post";
+import postService from "../services/postService";
 
 export default {
   name: "post-detail-desafio",
   components: {
-      Post,
+    Post
   },
   data() {
-    return {};
+    return {
+      post: null
+    };
+  },
+  created: function() {
+    const slug = this.$route.params.slug;
+
+    if (slug) {
+      postService
+        .getDetail(slug)
+        .then(response => {
+          console.log(response.data);
+          this.post = response.data.post;
+        })
+        .catch(err => console.log(err));
+    }
   }
 };
 </script>

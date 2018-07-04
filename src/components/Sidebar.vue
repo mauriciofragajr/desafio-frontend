@@ -3,15 +3,15 @@
     <div class="p-3">
       <h4 class="font-italic">Categorias</h4>
       <ol class="list-unstyled mb-0">
-        <li v-for="cat in getCategories" :key="cat._id"><a class="text-muted" href="#">{{cat.name}}</a></li>
+        <li v-for="cat in getCategories" :key="cat._id"><a class="text-muted" :href="'/categories/' + cat.slug">{{cat.name}}</a></li>
       </ol>
     </div>
 
     <div class="p-3">
       <h4 class="font-italic">Área administrativa</h4>
       <ol class="list-unstyled mb-0">
-        <li><a class="text-muted" href="#">Incluir Postagem</a></li>
-        <li><a class="text-muted" href="#">Ver postagens</a></li>
+        <li><router-link class="text-muted" :to="{ path: '/dashboard/post-form'}">Incluir Postagem</router-link></li>
+        <li><router-link class="text-muted" :to="{ path: '/dashboard'}">Ver postagens</router-link></li>
       </ol>
     </div>
 
@@ -28,6 +28,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    reload() {
+      this.$router.reload();
+    }
   }
 };
 </script>

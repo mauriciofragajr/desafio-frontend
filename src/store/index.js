@@ -22,8 +22,8 @@ const getters = {
 }
 
 const actions = {
-  setCategories({ dispatch }, obj) {
-    dispatch('SET_CATEGORIES', obj)
+  setCategories({ commit }, obj) {
+    commit('SET_CATEGORIES', obj)
   },
   fetchCategories({ commit }) {
     categoryService.get().then(response => {

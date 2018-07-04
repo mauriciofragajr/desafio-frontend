@@ -13,8 +13,8 @@ export default {
     create(post) {
         return api.post(`/posts`, post);
     },
-    update(post) {
-        return api.delete(`/posts/${post.slug}`, post);
+    update(post, slug) {
+        return api.put(`/posts/${slug}`, post);
     },
     delete(post_slug) {
         return api.delete(`/posts/${post_slug}`);

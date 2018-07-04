@@ -2,13 +2,13 @@
   <div class="col-md-6 col-sm12">
     <div class="card flex-md-row mb-4 box-shadow h-md-250">
       <div class="card-body d-flex flex-column align-items-start">
-        <strong class="d-inline-block mb-2 text-primary">Categoria</strong>
+        <!-- <span class="text-primary" v-for="cat in post.categories" :key="cat._id">{{cat.name}}</span> -->
         <h3 class="mb-0">
           <a class="text-dark" href="#">{{post.title}}</a>
         </h3>
-        <div class="mb-1 text-muted">{{post.createdAt}}</div>
-        <p class="card-text mb-auto">{{post.body.slice(0,20)}}...</p>
-        <a href="#">Ler mais</a>
+        <div class="mb-1 text-muted">{{post.createdAt | formatDate}}</div>
+        <p class="card-text mb-auto" v-html="post.body"></p>
+        <router-link :to="{ path: '/posts/' + post.slug }">Ler mais</router-link>
       </div>
     </div>
   </div>
