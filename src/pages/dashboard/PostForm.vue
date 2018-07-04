@@ -13,7 +13,13 @@
           </div>
           <div class="col-12 mb-3">
             <label for="slug">Slug</label>
-            <input type="text" class="form-control" v-model.trim="newPost.slug" @keyup="toLowerCase" pattern="[a-z0-9\-]+" id="slug" placeholder="Título" required>
+            <!-- <input type="text" class="form-control" v-model.trim="newPost.slug" @keyup="toLowerCase" pattern="[a-z0-9\-]+" id="slug" placeholder="Slug" required> -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">https://blog.com/posts/</span>
+              </div>
+              <input type="text" class="form-control" v-model.trim="newPost.slug" @keyup="toLowerCase" pattern="[a-z0-9\-]+" id="slug" placeholder="Slug" required>
+            </div>
             <div class="invalid-feedback">
               Por favor, digite um slug.
             </div>
@@ -26,7 +32,9 @@
               <input type="checkbox" class="custom-control-input" v-model="newPost.categories" :id="cat.slug" :value="cat._id">
               <label class="custom-control-label" :for="cat.slug">{{cat.name}}</label>
             </div>
-            <a href="#" v-on:click="createCategory = !createCategory" class="mb-1">+ Criar Categoria</a>
+            <div>
+              <a href="#" v-on:click="createCategory = !createCategory" class="mb-1">+ Criar Categoria</a>
+            </div>
             <div class="row" v-if="createCategory">
               <div class="col-12 mb-3">
                 <form v-on:submit.prevent="saveCategory">
