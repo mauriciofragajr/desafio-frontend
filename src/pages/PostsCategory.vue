@@ -58,6 +58,12 @@ export default {
           this.isLoading = false;
         });
     }
+  },
+  watch: {
+    $route: function() {
+      this.posts = [];
+      this.fetchPosts(this.$route.params.slug);
+    }
   }
 };
 </script>

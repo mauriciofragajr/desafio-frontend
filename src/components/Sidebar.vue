@@ -3,7 +3,7 @@
     <div class="p-3">
       <h4 class="font-italic">Categorias</h4>
       <ol class="list-unstyled mb-0">
-        <li v-for="cat in getCategories" :key="cat._id"><a class="text-muted" :href="'/categories/' + cat.slug">{{cat.name}}</a></li>
+        <li v-for="cat in getCategories" :key="cat._id"><router-link class="text-muted" :to="{ path:'/categories/' + cat.slug }">{{cat.name}}</router-link></li>
       </ol>
     </div>
 
@@ -24,7 +24,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "sidebar-desafio",
   computed: {
-    ...mapGetters(["getCategories", "getIsLoading","getAdminMode"])
+    ...mapGetters(["getCategories", "getIsLoading", "getAdminMode"])
   },
   data() {
     return {};
