@@ -13,7 +13,7 @@
           </div>
           <div class="col-12 mb-3">
             <label for="slug">Slug</label>
-            <input type="text" class="form-control" v-model.trim="newPost.slug" pattern="[a-z0-9\-]+" id="slug" placeholder="Título" required>
+            <input type="text" class="form-control" v-model.trim="newPost.slug" @keyup="toLowerCase" pattern="[a-z0-9\-]+" id="slug" placeholder="Título" required>
             <div class="invalid-feedback">
               Por favor, digite um slug.
             </div>
@@ -31,7 +31,7 @@
               <div class="col-12 mb-3">
                 <form v-on:submit.prevent="saveCategory">
                   <input type="text" class="form-control mb-1" v-model.trim="newCategory.name" id="categoryName" placeholder="Nome" required>
-                  <input type="text" class="form-control mb-1" v-model.trim="newCategory.slug" id="categorySlug" pattern="[a-z0-9\-]+" placeholder="Slug" required>
+                  <input type="text" class="form-control mb-1" v-model.trim="newCategory.slug" id="categorySlug" @keyup="toLowerCase" pattern="[a-z0-9\-]+" placeholder="Slug" required>
                   <button type="submit" class="btn btn-primary">Incluir</button>
                 </form>
               </div>
@@ -149,6 +149,10 @@ export default {
             console.log(err);
           });
       }
+    },
+    toLowerCase() {
+      this.newCategory.slug = this.newCategory.slug.toLowerCase();
+      this.newPost.slug = this.newPost.slug.toLowerCase();
     },
     ...mapActions(["fetchCategories"])
   }

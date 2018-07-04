@@ -2,6 +2,9 @@
   <nav class="col-md-3 d-none d-md-block p-4">
     <div class="p-3">
       <h4 class="font-italic">Categorias</h4>
+      <div v-if="getCategories.length == 0">
+        Nenhuma categoria.
+      </div>
       <ol class="list-unstyled mb-0">
         <li v-for="cat in getCategories" :key="cat._id"><router-link class="text-muted" :to="{ path:'/categories/' + cat.slug }">{{cat.name}}</router-link></li>
       </ol>

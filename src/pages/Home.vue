@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark" v-if="lastPost">
       <div class="col-md-6 px-0">
         <h1 class="display-4 font-italic">{{lastPost.title}}</h1>
         <p class="lead my-3" v-html="lastPost.body"></p>
@@ -9,6 +9,9 @@
     </div>
     <div class="row">
       <Post v-for="post in posts" :key="post._id" :post="post"/>
+    </div>
+    <div v-if="!lastPost">
+      Nenhuma postagem.
     </div>
   </div>
 </template>
@@ -41,7 +44,7 @@ export default {
   data() {
     return {
       posts: [],
-      lastPost: {},
+      lastPost: null,
       currentPage: 1,
       isLoading: false
     };
