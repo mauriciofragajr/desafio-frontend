@@ -40,6 +40,7 @@
                 <form v-on:submit.prevent="saveCategory">
                   <input type="text" class="form-control mb-1" v-model.trim="newCategory.name" id="categoryName" placeholder="Nome" required>
                   <input type="text" class="form-control mb-1" v-model.trim="newCategory.slug" id="categorySlug" @keyup="toLowerCase" pattern="[a-z0-9\-]+" placeholder="Slug" required>
+                  <div class="alert alert-danger" role="alert" v-if="errSlugCategory">Slug já existe</div>  
                   <button type="submit" class="btn btn-primary">Incluir</button>
                 </form>
               </div>
@@ -54,6 +55,7 @@
         </div>
          <div class="col-12">
            <div class="col-12 mb-3">
+             <div class="alert alert-danger" role="alert" v-if="errSlug">Slug já existe</div>  
             <button type="submit" class="btn btn-primary">Salvar</button>
             <button type="button" class="btn btn-light" v-on:click="$router.go(-1)">Cancelar</button>
            </div>
@@ -117,11 +119,14 @@ export default {
         name: "",
         slug: ""
       },
-      createCategory: false
+      createCategory: false,
+      errSlug: null,
+      errSlugCategory: null
     };
   },
   methods: {
     saveCategory() {
+      this.errSlugCategory = false;
       categoryService
         .create(this.newCategory)
         .then(data => {
@@ -133,6 +138,9 @@ export default {
         })
         .catch(err => {
           console.log(err);
+          if (err.response.status == 409) {
+            this.errSlugCategory = true;
+          }
         });
     },
     savePost() {
@@ -145,6 +153,9 @@ export default {
           })
           .catch(err => {
             console.log(err);
+            if (err.response.status == 409) {
+              this.errSlug = true;
+            }
           });
       } else if (this.mode == "EDIT") {
         postService
@@ -155,6 +166,9 @@ export default {
           })
           .catch(err => {
             console.log(err);
+            if (err.response.status == 409) {
+              this.errSlug = true;
+            }
           });
       }
     },
